@@ -1,0 +1,47 @@
+{
+  "generation": [
+    {
+      "templateId": "fioriexttemplate.extensionProject",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Wed, 26 Nov 2014 06:39:19 GMT"
+    },
+    {
+      "templateId": "fioriexttemplate.i18ncomponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Wed, 26 Nov 2014 08:55:53 GMT"
+    }
+  ],
+  "extensibility": {
+    "controllers": {
+      "Main": "HCM_TS_CRE%2fMain.controller.js",
+      "S2": "HCM_TS_CRE%2fview%2fS2.controller.js",
+      "S3": "HCM_TS_CRE%2fview%2fS3.controller.js",
+      "S31": "HCM_TS_CRE%2fview%2fS31.controller.js"
+    },
+    "views": {
+      "Main": "HCM_TS_CRE%2fMain.view.xml",
+      "S2": "HCM_TS_CRE%2fview%2fS2.view.xml",
+      "S3": "HCM_TS_CRE%2fview%2fS3.view.xml",
+      "S31": "HCM_TS_CRE%2fview%2fS31.view.xml"
+    },
+    "type": "BSP",
+    "component": "HCM_TS_CRE%2fComponent.js",
+    "configuration": "HCM_TS_CRE%2fConfiguration.js",
+    "namespace": "hcm.emp.mytimesheet",
+    "resourceBundle": "i18n/i18n.properties",
+    "system": {
+      "name": "OGO"
+    }
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  },
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/SRA002_TIMESHEET_SRV/",
+    "loadJSONFiles": false
+  }
+}
