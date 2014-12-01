@@ -9,6 +9,16 @@
       "templateId": "fioriexttemplate.i18ncomponent",
       "templateVersion": "1.4.0",
       "dateTimeStamp": "Wed, 26 Nov 2014 08:55:53 GMT"
+    },
+    {
+      "templateId": "fioriexttemplate.extendcontrollercomponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Mon, 01 Dec 2014 09:55:03 GMT"
+    },
+    {
+      "templateId": "fioriexttemplate.extendcontrollercomponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Mon, 01 Dec 2014 12:24:07 GMT"
     }
   ],
   "extensibility": {

@@ -14,17 +14,25 @@ sap.ui.component.load({
 });
 
 
-hcm.emp.mytimesheet.Component.extend("hcm.emp.mytimesheet.HCM_TS_CREExtension.Component", {
+hcm.emp.mytimesheet.Component.extend("hcm.emp.mytimesheet.test1.Component", {
 	metadata: {
 		version : "1.0",
 		
 		config: {
     "sap.ca.i18Nconfigs": {
-        "bundleName": "hcm.emp.mytimesheet.HCM_TS_CREExtension.i18n.i18n"
+        "bundleName": "hcm.emp.mytimesheet.test1.i18n.i18n"
     }
 },
 			
 		customizing: {
-		}			
+    "sap.ui.controllerExtensions": {
+        "hcm.emp.mytimesheet.view.S2": {
+            controllerName: "hcm.emp.mytimesheet.test1.view.S2Custom"
+        },
+        "hcm.emp.mytimesheet.view.S31": {
+            controllerName: "hcm.emp.mytimesheet.test1.view.S31Custom"
+        }
+    }
+}			
 	}
 });
