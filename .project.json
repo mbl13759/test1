@@ -53,5 +53,9 @@
   "mockpreview": {
     "mockUri": "/sap/opu/odata/sap/SRA002_TIMESHEET_SRV/",
     "loadJSONFiles": false
+  },
+  "deploy": {
+    "destination": "OGO",
+    "name": "ZTEST3"
   }
 }
