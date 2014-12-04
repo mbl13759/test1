@@ -38,16 +38,16 @@
     "component": "HCM_TS_CRE%2fComponent.js",
     "configuration": "HCM_TS_CRE%2fConfiguration.js",
     "namespace": "hcm.emp.mytimesheet",
-    "resourceBundle": "i18n/i18n.properties",
+    "resourceBundle": "i18n/i18n_nl.properties",
     "system": {
       "name": "OGO"
     }
   },
   "translation": {
     "translationDomain": "",
-    "supportedLanguages": "en,fr,de",
-    "defaultLanguage": "en",
-    "defaultI18NPropertyFile": "i18n.properties",
+    "supportedLanguages": "en,fr,de, nl",
+    "defaultLanguage": "nl",
+    "defaultI18NPropertyFile": "i18n_nl.properties",
     "resourceModelName": "i18n"
   },
   "mockpreview": {
