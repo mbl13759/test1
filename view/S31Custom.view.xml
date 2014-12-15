@@ -1,0 +1,147 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+--><core:View xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:me="sap.me" xmlns:mvc="sap.ui.core.mvc" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" controllerName="hcm.emp.mytimesheet.view.S31">
+ <Page id="page" title="{i18n&gt;MANUAL_INPUT_EDIT}" showNavButton="true" navButtonTap="onNavButton" enableScrolling="true">
+  <content>
+   <me:Calendar id="weeklyCalendar" singleRow="true" weeksPerRrow="1" design="Approval" enableMultiselection="true" tapOnDate="onTapOnDate" changeRange="onChangeRange" hideNavControls="true">
+   </me:Calendar>
+
+   <form:Form id="createformtitle" title="{i18n&gt;ENTRY_DETAILS}">
+
+    <form:layout>
+     <form:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="2" columnsL="1" columnsM="1">
+     </form:ResponsiveGridLayout>
+    </form:layout> 
+
+    <form:formContainers>
+     <form:FormContainer>
+
+      <form:formElements>
+<!-- Note 1959135: Added decimalTimeEntry input field -->
+       <form:FormElement visible="{/decimalTimeEntryVisible}">
+        <form:label>
+         <Label id="decimalInputLbl" class="entryDetaillabel" required="true" text="{i18n&gt;DURATION}">
+         </Label>
+        </form:label>
+        <form:fields>
+         <Input id="decimalTimeEntryValue" value="{entry&gt;/time}" change="onDecimalTimeValueChange">
+
+         </Input>
+        </form:fields>
+       </form:FormElement>
+
+       <form:FormElement visible="{/durationVisible}">
+
+        <form:label>
+         <Label id="hourInputLbl" class="entryDetaillabel" required="true" text="{i18n&gt;DURATION}">
+
+         </Label>
+        </form:label>
+        <form:fields>
+         <DateTimeInput id="DateTimeInputValue" type="Time" displayFormat="H'h' m'm'" valueFormat="HH:mm" change="onDurationValueChange" value="{parts: [{path: 'entry&gt;/hours'},{path: 'entry&gt;/minutes'}], formatter:'.durationDateForamtter'}">
+
+         </DateTimeInput>
+        </form:fields>
+       </form:FormElement>
+       <form:FormElement visible="{/clockEntry}">
+
+        <form:label>
+         <Label id="startTimeLbl" class="entryDetaillabel" required="true" text="{i18n&gt;FROM}" visible="{/clockEntry}">
+
+         </Label>
+        </form:label>
+        <form:fields>
+         <DateTimeInput id="startTime" type="Time" valueFormat="HHmmss" value="{entry&gt;/startTime}" change="validate">
+         </DateTimeInput>
+        </form:fields>
+       </form:FormElement>
+
+       <form:FormElement visible="{/clockEntry}">
+
+        <form:label>
+         <Label id="endTimeLbl" class="entryDetaillabel" required="true" text="{i18n&gt;TO}">
+
+         </Label>
+        </form:label>
+        <form:fields>
+         <DateTimeInput id="endTime" type="Time" valueFormat="HHmmss" value="{entry&gt;/endTime}" change="validate">
+
+         </DateTimeInput>
+        </form:fields>
+       </form:FormElement>
+       <form:FormElement>
+
+        <form:label>
+         <Label text="{i18n&gt;NOTE}" class="entryDetaillabel">
+
+         </Label>
+        </form:label>
+        <form:fields>
+         <TextArea id="S31TextArea" value="{entry&gt;/notes}">
+
+         </TextArea>
+        </form:fields>
+       </form:FormElement>
+       <form:FormElement>
+
+            <form:label>
+                <Label text="{i18n&gt;COST_ASSIGNMENT}" required="true" class="entryDetaillabel">
+
+                </Label>
+            </form:label>
+            <form:fields>
+                <RadioButton id="Recent" text="{i18n&gt;RECENTLY_USED}" groupName="Cost_Assignment" selected="{fordynamictypes&gt;/recentlyUsedSelected}" select="onRecentUsedSelect">
+
+                </RadioButton>
+                <RadioButton id="Manual" text="{i18n&gt;MANUAL_INPUT_ADD}" groupName="Cost_Assignment" selected="{fordynamictypes&gt;/manualEntrySelected}" select="onManualEntrySelect">
+
+                </RadioButton>
+            </form:fields>
+        </form:FormElement>
+
+        <!-- 15-12-2014 - M. Blaak - Wijziging Inputveld Recent Gebruikt-->
+        <!-- Toevoeging functionaliteit voor autocomplete in het inputveld-->
+        <form:FormElement id="COST_ASSIGNMENT_RECENTLY_USED_LIST_ELEMENT">
+            <form:label>
+                <Label></Label>
+            </form:label>
+            <form:fields>
+                <Input id="COST_ASSIGNMENT_RECENTLY_USED_LIST" type="Text" placeholder="{/sel_sugg_txt}" showSuggestion="true" showValueHelp="true" valueHelpRequest="onSuggestedInputHelp" suggestionItemSelected="onSuggestedItemSelection" suggestionItems="{/projects}" >
+                    <suggestionItems>
+                        <core:Item text="{name}" />
+                    </suggestionItems>
+                </Input>
+            </form:fields>
+            <!-- 
+            <form:fields>
+                <Input id="COST_ASSIGNMENT_RECENTLY_USED_LIST" showSuggestion="true" showValueHelp="true" valueHelpRequest="onSuggestedInputHelp" suggestionItemSelected="onSuggestedItemSelection" liveChange="suggestionHelpChange" placeholder="{/sel_sugg_txt}"></Input>
+            </form:fields>
+            -->
+        </form:FormElement>
+        <!-- extension point for additional Form Element -->
+           <core:ExtensionPoint name="extS31FormElement"/>
+      </form:formElements>
+     </form:FormContainer>
+
+     <form:FormContainer id="COST_ASSIGNMENT_MANUAL_INPUT_LIST" formElements="{fordynamictypes&gt;/types}">
+      <form:FormElement>
+       <form:label>
+        <Label class="entryDetaillabel" text="{fordynamictypes&gt;name}">
+        </Label>
+       </form:label>
+       <form:fields>
+        <Input showValueHelp="true" name="{fordynamictypes&gt;fieldName}" valueStateText="{fordynamictypes&gt;valueStateText}" valueHelpRequest="onInputHelp" liveChange="manualHelpChange" suggestionItemSelected="onManualItemSelection" value="{fordynamictypes&gt;value}" enabled="{fordynamictypes&gt;READONLY}"> <!-- Note: Addition of readOnly property-->
+        </Input>
+       </form:fields>
+      </form:FormElement>
+     </form:FormContainer>
+
+
+    </form:formContainers>
+   </form:Form>
+  </content>
+ </Page>
+</core:View>
+  

@@ -368,7 +368,9 @@ sap.ui.controller("hcm.emp.mytimesheet.test1.view.S2Custom", {
 				h = jQuery.proxy(function(e) {
 					var o = e.getParameter("selectedItem");
 					if (o) {
-					   // 01-12-2014: M. Blaak s.oHelp.setValue(o.getTitle() + ", " + o.getDescription());
+					   // 01-12-2014: M. Blaak Wijziging Quick Entry
+					   // Alleen de naam van het geselecteerde item overnemen in inputveld
+					   // s.oHelp.setValue(o.getTitle() + ", " + o.getDescription());
 						s.oHelp.setValue(o.getTitle());
 						s.leftButton.setProperty('enabled', true);
 						for (var i = 0; i < s.workList.length; i++) {

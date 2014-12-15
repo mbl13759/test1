@@ -117,6 +117,13 @@ sap.ui.controller("hcm.emp.mytimesheet.test1.view.S31Custom", {
 		$(window).resize(function() {
 			s.scrollerResize()
 		});
+		
+		//  15-12-2014 - M. Blaak Toevoeging filtering voor Inputveld Recent Gebruikt
+		this.byId("COST_ASSIGNMENT_RECENTLY_USED_LIST").setFilterFunction(function(sTerm, oItem) {
+        // A case-insensitive 'string contains' style filter
+        return oItem.getText().match(new RegExp(sTerm, "i"));
+        });
+        
 		s.recentlyUsedList = s.byId("COST_ASSIGNMENT_RECENTLY_USED_LIST");
 		s.oModel.setProperty("/sel_sugg_txt", s.oBundle.getText('SELECT_PLACEHOLDER') + " " + s.oBundle.getText('RECENTLY_USED'));
 		s.getView().setModel(s.oModel);
@@ -462,7 +469,15 @@ sap.ui.controller("hcm.emp.mytimesheet.test1.view.S31Custom", {
 		this.validateSaveBtnVisibility(e)
 	},
 	onSuggestedItemSelection: function(e) {
-		this.validateSaveBtnVisibility(e)
+	    // 15-12-2014 - M. Blaak - Wijziging Inputveld Recent gebruikt
+	    // Als uit autocomplete lijst wordt gekozen de index voor het gekozen item
+	    // vastleggen in het model tbv van functie OnDone()
+	    var s = this;
+	    var oSelectedItem = e.getParameter("selectedItem");
+	    if (oSelectedItem) {
+	        s.selectedIndex = oSelectedItem.getParent().indexOfSuggestionItem(oSelectedItem);
+		    this.validateSaveBtnVisibility(e);
+	    }
 	},
 	onManualItemSelection: function(e) {
 		this.validateSaveBtnVisibility(e)
@@ -858,7 +873,8 @@ sap.ui.controller("hcm.emp.mytimesheet.test1.view.S31Custom", {
 			var d = c.getParameter("selectedItem");
 			if (d) {
 				s.selectedIndex = c.getParameter("selectedItem").getParent().indexOfItem(c.getParameter("selectedItem"));
-				// 01-12-2014: M. Blaak
+				// 01-12-2014: M. Blaak Wijziging
+				// Alleen de naam van het geselecteerde item overnemen in inputveld
 				// if (d.getDescription()) {
 				//     b.setValue(d.getTitle() + ", " + d.getDescription())
 				// } else {

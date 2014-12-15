@@ -32,6 +32,12 @@ hcm.emp.mytimesheet.Component.extend("hcm.emp.mytimesheet.test1.Component", {
         "hcm.emp.mytimesheet.view.S31": {
             controllerName: "hcm.emp.mytimesheet.test1.view.S31Custom"
         }
+    },
+    "sap.ui.viewReplacements": {
+        "hcm.emp.mytimesheet.view.S31": {
+            viewName: "hcm.emp.mytimesheet.test1.view.S31Custom",
+            type: "XML"
+        }
     }
 }			
 	}
